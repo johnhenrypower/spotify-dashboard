@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Playlists | John Power</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="grid-overlay"></div>
+
+    <nav>
+        <a href="https://johnhpower.com" class="logo">JHP</a>
+        <div class="nav-right">
+            <span class="nav-title">Spotify Playlists</span>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="dashboard-section">
+            <!-- User Header -->
+            <div class="user-header">
+                <img id="user-avatar" class="user-avatar" src="" alt="User">
+                <div class="user-info">
+                    <h2 id="user-name">Loading...</h2>
+                    <p id="playlist-count" class="playlist-count"></p>
+                </div>
+            </div>
+
+            <!-- Playlists Grid -->
+            <div class="section-header">
+                <h3>My Playlists</h3>
+            </div>
+            <div id="playlists-grid" class="playlists-grid">
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>Loading playlists...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error State -->
+        <section id="error-section" class="error-section" style="display: none;">
+            <div class="error-content">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <h2>Something went wrong</h2>
+                <p id="error-message">Unable to load playlists.</p>
+                <button id="retry-btn" class="btn btn-primary">Try Again</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Powered by <a href="https://spotify.com" target="_blank">Spotify</a> API</p>
+    </footer>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
