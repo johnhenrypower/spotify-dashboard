@@ -1,13 +1,11 @@
 :root {
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #12121a;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --text-primary: #ffffff;
-    --text-secondary: #a0a0b0;
-    --accent-1: #6366f1;
-    --accent-2: #8b5cf6;
-    --accent-3: #ec4899;
-    --gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    --bg: #fafafa;
+    --text: #111;
+    --text-secondary: #666;
+    --accent: #0d9488;
+    --accent-light: #ccfbf1;
+    --card-bg: #fff;
+    --border: #e5e5e5;
     --spotify-green: #1db954;
     --spotify-green-dark: #1aa34a;
     --success: #22c55e;
@@ -25,82 +23,36 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* Animated background */
-.bg-gradient {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.bg-gradient::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-    animation: float 20s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(2%, 2%) rotate(1deg); }
-    66% { transform: translate(-1%, 1%) rotate(-1deg); }
-}
-
-/* Grid pattern overlay */
-.grid-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 50px 50px;
-    z-index: -1;
-}
-
 /* Navigation */
 nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 1.5rem 3rem;
+    padding: 2rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1000;
-    background: rgba(10, 10, 15, 0.8);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border);
 }
 
 .logo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text);
     text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.logo:hover {
+    color: var(--accent);
 }
 
 .nav-right {
@@ -111,18 +63,18 @@ nav {
 
 .nav-title {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 500;
 }
 
 /* Buttons */
 .btn {
-    padding: 0.875rem 2rem;
-    border-radius: 100px;
-    font-size: 0.95rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     cursor: pointer;
     border: none;
     display: inline-flex;
@@ -131,20 +83,19 @@ nav {
 }
 
 .btn-primary {
-    background: var(--gradient);
+    background: var(--accent);
     color: white;
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 30px rgba(99, 102, 241, 0.5);
+    background: #0f766e;
+    transform: translateY(-1px);
 }
 
 /* Main content */
 main {
     flex: 1;
-    padding: 8rem 3rem 4rem;
+    padding: 3rem;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
@@ -167,9 +118,9 @@ main {
     gap: 1rem;
     margin-bottom: 3rem;
     padding: 1.5rem;
-    background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
 }
 
 .user-avatar {
@@ -177,7 +128,7 @@ main {
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
-    background: var(--gradient);
+    background: var(--accent-light);
 }
 
 .user-info {
@@ -185,13 +136,14 @@ main {
 }
 
 .user-info h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
 }
 
 .playlist-count {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
 }
 
 /* Section Headers */
@@ -203,8 +155,9 @@ main {
 }
 
 .section-header h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
 }
 
 /* Playlists Grid */
@@ -215,11 +168,11 @@ main {
 }
 
 .playlist-card {
-    background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
     padding: 1rem;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     cursor: pointer;
     text-decoration: none;
     color: inherit;
@@ -227,17 +180,17 @@ main {
 }
 
 .playlist-card:hover {
-    border-color: rgba(99, 102, 241, 0.3);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .playlist-image-container {
     aspect-ratio: 1;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     overflow: hidden;
     margin-bottom: 1rem;
-    background: var(--bg-secondary);
+    background: var(--accent-light);
 }
 
 .playlist-image {
@@ -252,12 +205,12 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gradient);
-    opacity: 0.5;
+    background: var(--accent-light);
 }
 
 .playlist-image-placeholder svg {
-    color: white;
+    color: var(--accent);
+    opacity: 0.5;
 }
 
 .playlist-info {
@@ -301,8 +254,8 @@ main {
 .spinner {
     width: 24px;
     height: 24px;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    border-top-color: var(--accent-1);
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-bottom: 1rem;
@@ -322,6 +275,8 @@ main {
 }
 
 .error-content h2 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
     margin-bottom: 0.5rem;
 }
 
@@ -334,8 +289,9 @@ main {
 footer {
     text-align: center;
     padding: 2rem;
+    border-top: 1px solid var(--border);
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: 0.875rem;
 }
 
 footer a {
@@ -369,7 +325,7 @@ footer a:hover {
     }
 
     main {
-        padding: 6rem 1.5rem 3rem;
+        padding: 2rem 1.5rem;
     }
 
     .playlists-grid {
