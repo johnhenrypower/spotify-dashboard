@@ -126,11 +126,27 @@ async function handleGetUser(env) {
 }
 
 /**
- * Get user's playlists
+ * Get user's playlists (only playlists owned by the user)
  */
 async function handleGetPlaylists(env, limit, offset) {
-    const playlists = await spotifyRequest(env, `/me/playlists?limit=${limit}&offset=${offset}`);
-    return jsonResponse(playlists);
+    // Get current user ID
+    const user = await spotifyRequest(env, '/me');
+    const userId = user.id;
+
+    // Fetch all playlists (need to fetch more since we'll filter some out)
+    const playlists = await spotifyRequest(env, `/me/playlists?limit=50&offset=${offset}`);
+
+    // Filter to only include playlists owned by the user
+    const ownedPlaylists = playlists.items.filter(
+        playlist => playlist.owner.id === userId
+    );
+
+    // Return filtered results
+    return jsonResponse({
+        ...playlists,
+        items: ownedPlaylists,
+        total: ownedPlaylists.length
+    });
 }
 
 /**
